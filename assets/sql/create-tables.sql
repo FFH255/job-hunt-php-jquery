@@ -19,3 +19,10 @@ CREATE TABLE `replies` (
         REFERENCES vacancies(id)
         ON DELETE CASCADE
 );
+
+CREATE TABLE `users` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` int NOT NULL
+);
