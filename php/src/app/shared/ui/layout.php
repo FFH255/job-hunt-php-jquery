@@ -14,7 +14,9 @@
 <body>
   <header></header>
   <main class="main">
-    <?php include_once dirname(__FILE__) . '/../../pages' . $_SERVER['PHP_SELF']; ?>
+    <?php
+    include_once dirname(__FILE__) . '/../../pages' . $_SERVER['PHP_SELF']; 
+    ?>
   </main>
 </body>
 
