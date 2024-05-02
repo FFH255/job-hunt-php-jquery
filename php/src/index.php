@@ -13,6 +13,7 @@
 <body>
   <?php
    echo $_SESSION["is_auth"];
+   echo $_SESSION['role'];
   ?>
 </body>
 

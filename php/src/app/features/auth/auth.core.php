@@ -24,8 +24,10 @@
 
     public function login(string $login, string $password): void {
       $user = $this->usersRepository->getUser($login, $password);
-      if (!is_null($user)) {
-        $_SESSION['is_auth'] = true;
+      if (is_null($user)) {
+        return;
       }
+      $_SESSION['is_auth'] = true;
+      $_SESSION['role'] = $user->role->value;
     }
   }
