@@ -3,29 +3,44 @@
     <form>
       <div>
         <label>Логин</label>
-        <input />
+        <input id="login" name="login" />
       </div>
 
       <div>
         <label>Пароль</label>
-        <input />
+        <input id="password" name="password" />
       </div>
 
-      <button>Войти</button>
+      <button id="login-button">Войти</button>
     </form>
   </div>
 </div>
 
 <script>
-$.ajax({
-  url: '/api/login.php',
-  method: 'post',
-  data: {
-    login: 'login',
-    password: 'password',
-  },
-  success: (res) => {
-    console.log(res);
+const loginInput = $('#login');
+const passwordInput = $('#password');
+const loginButton = $('#login-button');
+
+function login(e) {
+  e.preventDefault()
+
+  const login = loginInput.val();
+  const password = loginInput.val();
+  if (!login || !password) {
+    return;
   }
-})
+  $.ajax({
+    url: '/api/login.php',
+    method: 'post',
+    data: {
+      login: login,
+      password: password,
+    },
+    success: () => {
+      console.log('auth');
+    },
+  })
+}
+
+loginButton.on('click', login);
 </script>
