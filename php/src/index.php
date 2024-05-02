@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,9 @@
 </head>
 
 <body>
-  <?php phpinfo() ?>
+  <?php
+   echo $_SESSION["is_auth"];
+  ?>
 </body>
 
 </html>

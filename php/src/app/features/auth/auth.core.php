@@ -26,7 +26,6 @@
       $user = $this->usersRepository->getUser($login, $password);
       if (!is_null($user)) {
         $_SESSION['is_auth'] = true;
-        $_SESSION['role'] = $user->role;
       }
     }
   }
