@@ -1,12 +1,11 @@
 <?php 
-session_start();
-
 include_once dirname(__FILE__) . '/../app/features/auth/auth.compose.php';
 
 if(!isset($_POST['login']) || !isset($_POST['password'])) {
   http_response_code(400);
   return;
 }
+
 $login = $_POST['login'];
 $password = $_POST['password'];
 $authService->login($login, $password);
