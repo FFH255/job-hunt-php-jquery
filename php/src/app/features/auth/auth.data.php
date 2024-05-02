@@ -6,4 +6,8 @@ class UserRepositoryImpl extends UsersRepository {
   function getUser(string $login, string $password): User | null {
     return new User('seva', 'fadeev', Role::Admin);
   }
+
+  function addUser(string $login, string $password, int $role): User | null {
+    return new User('seva', 'fadeev', Role::Admin);
+  }
 }

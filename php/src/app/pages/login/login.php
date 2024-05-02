@@ -30,7 +30,7 @@ function login(e) {
     return;
   }
   $.ajax({
-    url: '/api/login.php',
+    url: '/api/auth/login.php',
     method: 'post',
     data: {
       login: login,
