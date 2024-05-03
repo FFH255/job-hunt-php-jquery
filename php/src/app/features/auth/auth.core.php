@@ -13,6 +13,13 @@
     ) {}
   }
 
+  class AuthDataDTO {
+    function __construct(
+      public bool $isAuth,
+      public int $role,
+    ) {}
+  }
+
   abstract class UsersRepository {
     abstract public function getUser(string $login, string $password): User | null;
     abstract public function addUser(string $login, string $password, int $role): User | null;
@@ -51,5 +58,12 @@
       session_start();
       session_unset();
       session_destroy();
+    }
+
+    public function getAuth(): AuthDataDTO {
+      return new AuthDataDTO(
+        $_SESSION[$this->IS_AUTH_KEY] ?? false,
+        $_SESSION[$this->ROLE_KEY] ?? Role::None->value,
+      );
     }
   }

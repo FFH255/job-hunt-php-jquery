@@ -1,4 +1,7 @@
 <?php 
+include_once dirname(__FILE__) . '/../main.php';
+session_start();
+$authData = $authService->getAuth();
 $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
 ?>
 
