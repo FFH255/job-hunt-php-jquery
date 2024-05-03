@@ -25,14 +25,15 @@
       private UsersRepository $usersRepository
     ) {}
 
-    public function login(string $login, string $password): void {
+    public function login(string $login, string $password): bool {
       $user = $this->usersRepository->getUser($login, $password);
       if (is_null($user)) {
-        return;
+        return false;
       }
       session_start();
       $_SESSION[$this->IS_AUTH_KEY] = true;
       $_SESSION[$this->ROLE_KEY] = $user->role->value;
+      return true;
     }
 
     public function register(string $login, string $password, int $role): bool {

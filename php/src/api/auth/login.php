@@ -8,7 +8,16 @@ if(!isset($_POST['login']) || !isset($_POST['password'])) {
 
 $login = $_POST['login'];
 $password = $_POST['password'];
-$authService->login($login, $password);
 
-http_response_code(200);
-return;
+try {
+  $ok = $authService->login($login, $password);
+
+  if (!$ok) {
+    http_response_code(401);
+    return;
+  }
+
+  http_response_code(200);
+} catch(Exception $e) {
+  http_response_code(500);
+}

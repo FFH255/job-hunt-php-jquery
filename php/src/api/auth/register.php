@@ -15,12 +15,15 @@ if (!is_numeric($role)) {
   return;
 }
 
-$ok = $authService->register($login, $password, $role);
+try {
+  $ok = $authService->register($login, $password, $role);
 
-if (!$ok) {
-  http_response_code(409);
-  return;
+  if (!$ok) {
+    http_response_code(409);
+    return;
+  }
+
+  http_response_code(200);
+} catch(Exception $error) {
+  http_response_code(500);
 }
-
-http_response_code(200);
-return;
