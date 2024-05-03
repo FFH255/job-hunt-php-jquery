@@ -1,0 +1,9 @@
+.register-page {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-page__content {
+  display: grid;
+}
