@@ -6,4 +6,5 @@
 
 .login-page__content {
   display: grid;
+  grid-template-rows: auto auto;
 }

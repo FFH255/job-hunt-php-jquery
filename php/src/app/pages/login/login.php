@@ -1,18 +1,20 @@
 <div class="login-page">
   <div class="login-page__content">
-    <form>
-      <div>
+    <h1 class="form-title">Вход</h1>
+    <form class="form">
+      <div class="form__item form__item_direction_col">
         <label>Логин</label>
-        <input id="login" name="login" />
+        <input id="login" name="login" class="input _border_main" required />
       </div>
 
-      <div>
+      <div class="form__item form__item_direction_col">
         <label>Пароль</label>
-        <input id="password" name="password" />
+        <input id="password" name="password" class="input _border_main" required />
       </div>
 
-      <button id="login-button">Войти</button>
+      <button id="login-button" class="button button_theme_positive">Войти</button>
     </form>
+    <a class="form-link" href="/register.php">Регистрация</a>
   </div>
 </div>
 

@@ -1,4 +1,5 @@
 .register-page {
+  margin-block: auto;
   display: grid;
   justify-content: center;
   align-items: center;

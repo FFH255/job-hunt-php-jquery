@@ -1,23 +1,24 @@
 <div class="register-page">
   <div class="register-page__content">
-    <form>
-      <div>
+    <h1 class="form-title">Регистрация</h1>
+    <form class="form">
+      <div class="form__item form__item_direction_col">
         <label>Логин</label>
-        <input id="login" name="login" />
+        <input id="login" name="login" class="input _border_main" required />
       </div>
 
-      <div>
+      <div class="form__item form__item_direction_col">
         <label>Пароль</label>
-        <input id="password" name="password" />
+        <input id="password" name="password" class="input _border_main" required />
       </div>
 
-      <div>
+      <div class="form__item form__item_direction_col">
         <label>Роль</label>
-        <input type="number" name="role" id="role" />
+        <input type="number" name="role" id="role" class="input _border_main" required />
       </div>
-
-      <button id="login-button">Войти</button>
+      <button class="button button_theme_positive" id="register-button">Регистрация</button>
     </form>
+    <a href="/login.php" class="form-link">Вход</a>
   </div>
 </div>
 
@@ -25,7 +26,7 @@
 const loginInput = $('#login');
 const passwordInput = $('#password');
 const roleInput = $('#role');
-const registerButton = $('#login-button');
+const registerButton = $('#register-button');
 
 function register(e) {
   e.preventDefault()

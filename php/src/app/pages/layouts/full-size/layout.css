@@ -1,0 +1,9 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  min-height: 100vh;
+  padding: 1rem 3rem;
+  width: 60vw;
+  margin-inline: auto; 
+}
