@@ -21,11 +21,17 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
 
 <body>
   <?php 
-  $headerLinks = [
+  $applicantHeaderLinks = [
     ['link' => '/', 'title' => 'Главная'],
-    ['link' => '/create-vacancy.php', 'title' => 'Добавить вакансию'],
     ['link' => '/replies.php', 'title' => 'Отклики'],
   ];
+
+  $employerHeaderLinks = [
+    ['link' => '/', 'title' => 'Главная'],
+    ['link' => '/replies.php', 'title' => 'Отклики'],
+  ];
+
+  $headerLinks = $authService->getAuth()->role  === Role::User->value ? $applicantHeaderLinks :  $employerHeaderLinks;
 
   $currentURL = $_SERVER['REQUEST_URI'];
 ?>
