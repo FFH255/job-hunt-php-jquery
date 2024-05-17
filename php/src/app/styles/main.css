@@ -23,6 +23,7 @@ html {
   background-color: var(--background-1000);
   font-family:  Arial, sans-serif;
   color: var(--main);
+  min-height: 100vh;
 }
 
 a {

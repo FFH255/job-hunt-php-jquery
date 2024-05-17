@@ -9,10 +9,10 @@
 
       <div class="form__item form__item_direction_col">
         <label>Пароль</label>
-        <input id="password" name="password" class="input _border_main" required />
+        <input id="password" name="password" type="password" class="input _border_main" required />
       </div>
 
-      <button id="login-button" class="button button_theme_positive">Войти</button>
+      <button id="login-button" class="button button_theme_positive" type="button">Войти</button>
     </form>
     <a class="form-link" href="/register.php">Регистрация</a>
   </div>
@@ -23,9 +23,7 @@ const loginInput = $('#login');
 const passwordInput = $('#password');
 const loginButton = $('#login-button');
 
-function login(e) {
-  e.preventDefault()
-
+function login(e) {     
   const login = loginInput.val();
   const password = loginInput.val();
   if (!login || !password) {
