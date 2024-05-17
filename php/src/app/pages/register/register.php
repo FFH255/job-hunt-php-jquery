@@ -18,6 +18,7 @@
       </div>
       <button class="button button_theme_positive" id="register-button">Регистрация</button>
     </form>
+    <span id="error-message" class="form-error-message"></span>
     <a href="/login.php" class="form-link">Вход</a>
   </div>
 </div>
@@ -27,6 +28,7 @@ const loginInput = $('#login');
 const passwordInput = $('#password');
 const roleInput = $('#role');
 const registerButton = $('#register-button');
+const errorMessage = $('#error-message');
 
 function register(e) {
   e.preventDefault()
@@ -46,8 +48,12 @@ function register(e) {
       role: role,
     },
     success: () => {
-      console.log('REGISTRATION SUCCESS!!!');
+      errorMessage.text('');
+      window.location.replace('/');
     },
+    error: () => {
+      errorMessage.text('Пользователь уже существует');
+    }
   })
 }
 

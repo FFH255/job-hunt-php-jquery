@@ -14,6 +14,7 @@
 
       <button id="login-button" class="button button_theme_positive" type="button">Войти</button>
     </form>
+    <span id="error-message" class="form-error-message"></span>
     <a class="form-link" href="/register.php">Регистрация</a>
   </div>
 </div>
@@ -22,10 +23,11 @@
 const loginInput = $('#login');
 const passwordInput = $('#password');
 const loginButton = $('#login-button');
+const errorMessage = $('#error-message');
 
-function login(e) {     
+function login(e) {
   const login = loginInput.val();
-  const password = loginInput.val();
+  const password = passwordInput.val();
   if (!login || !password) {
     return;
   }
@@ -37,8 +39,12 @@ function login(e) {
       password: password,
     },
     success: () => {
-      console.log('auth');
+      errorMessage.text('');
+      window.location.replace('/');
     },
+    error: () => {
+      errorMessage.text('Пользователь не найден');
+    }
   })
 }
 

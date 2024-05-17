@@ -43,16 +43,16 @@
   color: var(--contrast); 
 }
 
-.search-title {
-  border: 1px solid var(--main);
-  padding: .2rem .6rem;
-  border-radius: 6px;
+.header__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
 }
 
-.search-title__input {
-  cursor: text;
-}
-
-.search-title__button {
+.logout-button {
   cursor: pointer;
+}
+
+.logout-button:hover {
+  color: var(--contrast);
 }

@@ -43,10 +43,9 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
         }
       ?>
     </nav>
-    <form method="get" class="search-title" action="/">
-      <input name="filter_title" type="text" class="search-title__input" />
-      <input type="submit" value="Найти" class="search-title__button" />
-    </form>
+    <div class="header__actions">
+      <span id="logout-button" class="logout-button">Выйти</span>
+    </div>
   </header>
 
   <main class="main">
@@ -54,6 +53,22 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
     include_once dirname(__FILE__) . '/../..' . $pageName . $pageName . '.php';
     ?>
   </main>
+
+  <script>
+  const logoutButton = $('#logout-button');
+  console.log('script')
+
+  function logout() {
+    $.ajax({
+      url: '/api/auth/logout.php',
+      success: () => {
+        window.location.replace('/login.php');
+      },
+    });
+  }
+
+  logoutButton.on('click', logout);
+  </script>
 </body>
 
 </html>
