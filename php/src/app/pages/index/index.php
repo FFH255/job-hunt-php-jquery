@@ -1,1 +1,2 @@
-Hello world
+<?php
+print_r($vacanciesRepository->getVacancies());
