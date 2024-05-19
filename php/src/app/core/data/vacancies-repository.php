@@ -64,4 +64,42 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
     $stmt->execute();
     $stmt->get_result();
    }
+
+   function createVacancy(VacancyFormValue $formValue, int $employerId): Vacancy {
+      $stmt = $this->bd->prepare("INSERT INTO vacancies (title, company, employment, experience_from, experience_to, city, salary_from, salary_to, description, employer_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+      $stmt->bind_param("sssssssssi", 
+        $formValue->title, 
+        $formValue->company, 
+        $formValue->employment, 
+        $formValue->experienceFrom, 
+        $formValue->experienceTo, 
+        $formValue->city, 
+        $formValue->salaryFrom, 
+        $formValue->salaryTo, 
+        $formValue->description, 
+        $employerId
+      );
+
+      $stmt->execute();
+
+      $vacancyId = $stmt->insert_id;
+
+      $stmt->close();
+
+      $vacancy = new Vacancy(
+        $vacancyId, 
+        $formValue->title, 
+        $formValue->employment, 
+        $formValue->description,
+        $formValue->company, 
+        $formValue->experienceFrom, 
+        $formValue->experienceTo, 
+        $formValue->city, 
+        $formValue->salaryFrom, 
+        $formValue->salaryTo
+      );
+
+      return $vacancy;
+   }
 }

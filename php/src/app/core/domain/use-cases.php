@@ -120,3 +120,36 @@ class GetEmployerVacancies {
     return $this->vacanciesRepository->getVacancies($employerId);
   }
 }
+
+class VacancyFormValue {
+  function __construct(
+    public string $title, 
+    public string $employment, 
+    public string $description,
+    public ?string $company = null, 
+    public ?string $experienceFrom = null, 
+    public ?string $experienceTo = null, 
+    public ?string $city = null, 
+    public ?string $salaryFrom = null, 
+    public ?string $salaryTo = null
+  ) {}
+}
+
+class CreateVacancy {
+  function __construct(
+    private VacanciesRepository $vacanciesRepository,
+    private ViewerRepository $viewerRepository
+  ) {}
+
+  function execute(VacancyFormValue $formValue): Vacancy | null {
+    $role = $this->viewerRepository->getRole();
+    if ($role !== Role::Employer) {
+      return null;
+    }
+    $employerId = $this->viewerRepository->getId();
+    if (is_null($employerId)) {
+      return null;
+    }
+    return $this->vacanciesRepository->createVacancy($formValue, $employerId);
+  }
+}

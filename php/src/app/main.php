@@ -34,6 +34,8 @@ $getApplicantVacancies = new GetApplicantVacancies($vacanciesRepository, $replie
 
 $getEmployerVacancies = new GetEmployerVacancies($vacanciesRepository, $repliesRepository, $viewerRepository);
 
+$createVacancy = new CreateVacancy($vacanciesRepository, $viewerRepository);
+
 $getApplicantVacancy = new GetApplicantVacancy($vacanciesRepository, $repliesRepository, $viewerRepository);
 
 $getApplicantReplies = new GetApplicantReplies($repliesRepository, $viewerRepository);

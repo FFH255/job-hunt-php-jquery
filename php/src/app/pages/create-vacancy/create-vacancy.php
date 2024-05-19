@@ -66,10 +66,10 @@ $('.form').submit(function(event) {
 
   $.ajax({
     url: `/api/create-vacancy.php`,
-    method: 'post',
-    body: formData,
-    success: () => {
-      
+    method: 'POST',
+    data: formData,
+    success: (e) => {
+      window.location = '/employer-vacancies.php';
     },
   })
 });
