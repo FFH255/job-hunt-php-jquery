@@ -1,6 +1,4 @@
 <?php
-
-include_once dirname(__FILE__) . '/../domain/models.php';
 include_once dirname(__FILE__) . '/../domain/repositories.php';
 
 class VacanciesRepositoryImpl extends VacanciesRepository {

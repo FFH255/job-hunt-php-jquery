@@ -25,23 +25,47 @@ class RepliesRepositoryImpl extends RepliesRepository {
     return $vacancies;
   }
 
-  function getReply(int $id): Reply | null {
-    $query = "SELECT r.id, r.created_at, v.title, v.company FROM replies as r JOIN vacancies as v WHERE r.vacancy_id = v.id AND r.id = ? LIMIT 1;";
+  function getReply(?int $id = null, ?int $applicantId = null, ?int $vacancyId = null): Reply | null {
+    $query = "SELECT r.id, r.created_at, v.title, v.company FROM replies as r JOIN vacancies as v WHERE r.vacancy_id = v.id";
+
+    $params = [];
+    if ($id !== null) {
+        $query .= " AND r.id = ?";
+        $params[] = $id;
+    }
+    if ($applicantId !== null) {
+        $query .= " AND r.user_id = ?";
+        $params[] = $applicantId;
+    }
+    if ($vacancyId !== null) {
+        $query .= " AND r.vacancy_id = ?";
+        $params[] = $vacancyId;
+    }
+
+    $query .= " LIMIT 1";
+
+    if (!count($params)) {
+      return null;
+    }
+
     $stmt = $this->bd->prepare($query);
-    $stmt->bind_param("i", $replyId);
+    if ($params) {
+        $types = str_repeat("i", count($params));
+        $stmt->bind_param($types, ...$params);
+    }
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
     if (!$row['id'] || !$row['created_at'] || !$row['title'] || !$row['company']) {
-      return null;
+        return null;
     }
 
     return new Reply(
-      $row['id'],
-      $row['created_at'],
-      $row['title'],
-      $row['company']
+        $row['id'],
+        $row['created_at'],
+        $row['title'],
+        $row['company']
     );  
   }
 

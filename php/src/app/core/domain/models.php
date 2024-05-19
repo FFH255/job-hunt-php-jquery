@@ -22,7 +22,23 @@ class Reply {
   ) {}
 }
 
-class Vacancy {
+class ApplicantVacancy {
+  public function __construct(
+    public int $id, 
+    public string $title, 
+    public string $employment, 
+    public string $description,
+    public bool $isReplied,
+    public ?string $company = null, 
+    public ?string $experienceFrom = null, 
+    public ?string $experienceTo = null, 
+    public ?string $city = null, 
+    public ?string $salaryFrom = null, 
+    public ?string $salaryTo = null
+  ) {}
+}
+
+class EmployerVacancy {
   public function __construct(
     public int $id, 
     public string $title, 
