@@ -9,10 +9,12 @@ abstract class UsersRepository {
 abstract class ViewerRepository {
   abstract function setIsAuth(bool $isAuth): void;
   abstract function isAuth(): bool;  
-  abstract function setRole(Role $rolw): void;
+  abstract function setRole(Role $role): void;
   abstract function getRole(): Role | null;
   abstract function setId(int $id): void;
   abstract function getId(): int | null;
+  abstract function getLogin(): string | null;
+  abstract function setLogin(string $login): void;
 }
 
 abstract class RepliesRepository {

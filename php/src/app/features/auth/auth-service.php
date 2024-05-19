@@ -15,6 +15,7 @@
       $this->viewerRepository->setIsAuth(true);
       $this->viewerRepository->setRole($user->role);
       $this->viewerRepository->setId($user->id);
+      $this->viewerRepository->setLogin($user->name);
       return true;
     }
 
@@ -27,7 +28,7 @@
       $this->viewerRepository->setIsAuth(true);
       $this->viewerRepository->setRole($user->role);
       $this->viewerRepository->setId($user->id);
-
+      $this->viewerRepository->setLogin($user->name);
       return true;
     }
 

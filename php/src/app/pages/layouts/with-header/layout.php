@@ -52,6 +52,7 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
       ?>
     </nav>
     <div class="header__actions">
+      <span>Пользователь: <?php echo $viewerRepository->getLogin(); ?></span>
       <span id="logout-button" class="logout-button">Выйти</span>
     </div>
   </header>
