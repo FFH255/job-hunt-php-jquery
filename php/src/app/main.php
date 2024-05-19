@@ -26,6 +26,10 @@ $vacanciesRepository = new VacanciesRepositoryImpl($db);
 
 $repliesRepository = new RepliesRepositoryImpl($db);
 
+$getApplicantVacancies = new GetApplicantVacancies($vacanciesRepository, $repliesRepository, $viewerRepository);
+
+$getApplicantVacancy = new GetApplicantVacancy($vacanciesRepository, $repliesRepository, $viewerRepository);
+
 $getApplicantReplies = new GetApplicantReplies($repliesRepository, $viewerRepository);
 
 $replayToVacancy = new ReplayToVacancy($viewerRepository, $repliesRepository);

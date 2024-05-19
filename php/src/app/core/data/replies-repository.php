@@ -25,7 +25,7 @@ class RepliesRepositoryImpl extends RepliesRepository {
     return $vacancies;
   }
 
-  function getReply(?int $id = null, ?int $applicantId = null, ?int $vacancyId = null): Reply | null {
+  function getReplies(?int $id = null, ?int $applicantId = null, ?int $vacancyId = null): array {
     $query = "SELECT r.id, r.created_at, v.title, v.company FROM replies as r JOIN vacancies as v WHERE r.vacancy_id = v.id";
 
     $params = [];
@@ -42,10 +42,8 @@ class RepliesRepositoryImpl extends RepliesRepository {
         $params[] = $vacancyId;
     }
 
-    $query .= " LIMIT 1";
-
     if (!count($params)) {
-      return null;
+      return [];
     }
 
     $stmt = $this->bd->prepare($query);
@@ -55,18 +53,17 @@ class RepliesRepositoryImpl extends RepliesRepository {
     }
     $stmt->execute();
     $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    if (!$row['id'] || !$row['created_at'] || !$row['title'] || !$row['company']) {
-        return null;
-    }
-
-    return new Reply(
+    $replies = [];
+    while ($row = $result->fetch_assoc()) {
+      $reply = new Reply(
         $row['id'],
         $row['created_at'],
         $row['title'],
         $row['company']
-    );  
+      );
+      $replies[] = $reply;
+    }
+    return $replies;  
   }
 
   function createReply(int $applicantId, int $vacancyId): Reply {
@@ -76,8 +73,8 @@ class RepliesRepositoryImpl extends RepliesRepository {
     $stmt->execute();
     
     $id = $stmt->insert_id;
-    $reply = $this->getReply($id);
+    $reply = $this->getReplies($id);
 
-    return $reply;
+    return $reply[0];
   }
 }

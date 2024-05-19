@@ -4,7 +4,7 @@
 <h2 class="placeholder">Вакансия не найдена</h2>
 <?php else: ?>
 
-<?php $vacancy = $vacanciesRepository->getVacancy(($id)); ?>
+<?php $vacancy = $getApplicantVacancy->execute($id) ?>
 
 <?php if ($vacancy === null): ?>
 <h2 class="placeholder">Вакансия не найдена</h2>
@@ -19,7 +19,8 @@
   <span>от <?= $vacancy->salaryFrom ?> до <?= $vacancy->salaryTo ?></span>
   <span><?= $vacancy->description ?></span>
   <div class='item__buttons'>
-    <button id="reply-button" class="button button_theme_positive">Откликнуться</button>
+    <button id="reply-button" class="button button_theme_positive"
+      disabled<?= $vacancy->isReplied; ?>>Откликнуться</button>
   </div>
 </div>
 
@@ -29,7 +30,9 @@ $('#reply-button').on('click', function() {
   $.ajax({
     url: `/api/reply-vacancy.php?id=${id}`,
     method: 'get',
-    success: () => {},
+    success: () => {
+      $(this).prop('disabled', true);
+    },
   })
 });
 </script>

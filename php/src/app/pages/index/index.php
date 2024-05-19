@@ -1,5 +1,5 @@
 <?php
-$vacancies = $vacanciesRepository->getVacancies();
+$vacancies = $getApplicantVacancies->execute();
 ?>
 
 <div class='list'>
@@ -32,7 +32,10 @@ $vacancies = $vacanciesRepository->getVacancies();
       <?php endif; ?>
     </span>
     <div class='item__buttons'>
-      <button data-id="<?= $vacancy->id ?>" class='replay-button button button_theme_positive'>Откликнуться</button>
+      <button data-id="<?= $vacancy->id ?>" class='replay-button button button_theme_positive'
+        disabled<?= $vacancy->isReplied ?>>
+        Откликнуться
+      </button>
     </div>
   </div>
   <?php endforeach; ?>
@@ -53,7 +56,7 @@ $('.replay-button').on('click', function(e) {
     url: `/api/reply-vacancy.php?id=${vacancyId}`,
     method: 'get',
     success: () => {
-
+      $(this).prop('disabled', true);
     },
   })
 });
