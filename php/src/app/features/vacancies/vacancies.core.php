@@ -7,7 +7,6 @@ class Vacancy {
     public string $title, 
     public string $employment, 
     public string $description,
-    public string $replies,
     public ?string $company = null, 
     public ?string $experienceFrom = null, 
     public ?string $experienceTo = null, 

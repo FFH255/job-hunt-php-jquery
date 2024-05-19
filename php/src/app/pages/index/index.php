@@ -30,7 +30,12 @@ foreach($vacancies as $vacancy) {
   if (!$vacancy->salaryFrom && !$vacancy->salaryTo) {
     echo " не указано";
   }
-  echo "</span>";  
-  echo "</div>";
+  echo "
+      </span>
+      <div class='item__buttons'>
+        <button class='button button_theme_positive'>Откликнуться</button>
+      </div>
+    </div>
+  ";  
 }
 echo "</div>";

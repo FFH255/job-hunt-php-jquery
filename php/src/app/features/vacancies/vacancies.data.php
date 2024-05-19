@@ -19,7 +19,6 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
         $row['title'],
         $row['employment'],
         $row['description'],
-        $row['replies'],
         $row['company'],
         $row['experience_from'],
         $row['experience_to'],
