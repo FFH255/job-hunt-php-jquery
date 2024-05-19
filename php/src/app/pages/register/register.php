@@ -9,12 +9,15 @@
 
       <div class="form__item form__item_direction_col">
         <label>Пароль</label>
-        <input id="password" name="password" class="input _border_main" required />
+        <input id="password" name="password" type="password" class="input _border_main" required />
       </div>
 
       <div class="form__item form__item_direction_col">
         <label>Роль</label>
-        <input type="number" name="role" id="role" class="input _border_main" required />
+        <select id="role" class="select _border_main">
+          <option value="1">Соискатель</option>
+          <option value="2">Работадатель</option>
+        </select>
       </div>
       <button class="button button_theme_positive" id="register-button">Регистрация</button>
     </form>

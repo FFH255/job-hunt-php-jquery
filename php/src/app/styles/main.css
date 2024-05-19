@@ -31,7 +31,7 @@ a {
   color: inherit;
 }
 
-button, input, textarea {
+button, input, textarea, select {
 	background: none;
 	color: inherit;
 	border: none;

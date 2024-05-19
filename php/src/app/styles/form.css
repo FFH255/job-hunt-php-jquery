@@ -36,6 +36,13 @@
 .input {
   padding: .3rem .6rem;
   font-size: .9rem;
+  line-height: 1;
+}
+
+.select {
+  padding: .3rem .6rem;
+  font-size: .9rem;
+  line-height: 1;
 }
 
 .form-error-message {
