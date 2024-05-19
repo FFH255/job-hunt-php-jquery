@@ -56,4 +56,12 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
       $row['salary_to'],
     );
    }
+
+   function deleteVacancy(int $id): void {
+    $query = "DELETE FROM vacancies WHERE id = ?;";
+    $stmt = $this->bd->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->get_result();
+   }
 }

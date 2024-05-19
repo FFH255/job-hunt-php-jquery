@@ -19,10 +19,23 @@
   <span>от <?= $vacancy->salaryFrom ?> до <?= $vacancy->salaryTo ?></span>
   <span><?= $vacancy->description ?></span>
   <div class='item__buttons'>
-    <button class="button button_theme_neutral">Редатировать</button>
-    <button class="button button_theme_danger">Редатировать</button>
+    <button id="edit-vacancy-button" class="button button_theme_neutral">Редатировать</button>
+    <button id="delete-vacancy-button" class="button button_theme_danger">Удалить</button>
   </div>
 </div>
 
 <?php endif ?>
 <?php  endif ?>
+
+<script>
+$('#delete-vacancy-button').on('click', function() {
+  const id = <?= $id ?>;
+  $.ajax({
+    url: `/api/delete-vacancy.php?id=${id}`,
+    method: 'get',
+    success: () => {
+      window.location = '/employer-vacancies.php';
+    },
+  })
+})
+</script>
