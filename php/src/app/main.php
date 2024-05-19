@@ -18,6 +18,8 @@ include_once dirname(__FILE__) . '/features/auth/auth.guards.php';
 
 $db = new mysqli('db', 'root', 'root', 'job_hunt_db');
 
+// repositories
+
 $userRepository = new UserRepositoryImpl($db);
 
 $viewerRepository = new ViewerRepositoryImpl();
@@ -26,7 +28,11 @@ $vacanciesRepository = new VacanciesRepositoryImpl($db);
 
 $repliesRepository = new RepliesRepositoryImpl($db);
 
+// use-cases
+
 $getApplicantVacancies = new GetApplicantVacancies($vacanciesRepository, $repliesRepository, $viewerRepository);
+
+$getEmployerVacancies = new GetEmployerVacancies($vacanciesRepository, $repliesRepository, $viewerRepository);
 
 $getApplicantVacancy = new GetApplicantVacancy($vacanciesRepository, $repliesRepository, $viewerRepository);
 
@@ -34,6 +40,10 @@ $getApplicantReplies = new GetApplicantReplies($repliesRepository, $viewerReposi
 
 $replayToVacancy = new ReplayToVacancy($viewerRepository, $repliesRepository);
 
+// services
+
 $authService = new AuthService($userRepository, $viewerRepository);
 
 $applicantGuard = new ApplicantGuard($viewerRepository);
+
+$employerGuard = new EmployerGuard($viewerRepository);

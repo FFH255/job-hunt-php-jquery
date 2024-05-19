@@ -12,3 +12,16 @@ class ApplicantGuard {
     die();
   }
 }
+
+class EmployerGuard {
+  function __construct(private ViewerRepository $viewerRepository) {}
+  function canActivate() {
+    $role = $this->viewerRepository->getRole();
+    $isAuth = $this->viewerRepository->isAuth();
+    if ($isAuth === true && $role === Role::Employer) {
+      return;
+    }
+    header('Location: /login.php');
+    die();
+  }
+}

@@ -100,3 +100,23 @@ class GetApplicantVacancy {
     );
   }
 }
+
+class GetEmployerVacancies {
+  function __construct(
+    private VacanciesRepository $vacanciesRepository,
+    private RepliesRepository $repliesRepository,
+    private ViewerRepository $viewerRepository
+  ) {}
+
+  function execute(): array {
+    $role = $this->viewerRepository->getRole();
+    if($role !== Role::Employer) {
+      return [];
+    }
+    $employerId = $this->viewerRepository->getId();
+    if (is_null($employerId)) {
+      return [];
+    }
+    return $this->vacanciesRepository->getVacancies($employerId);
+  }
+}
