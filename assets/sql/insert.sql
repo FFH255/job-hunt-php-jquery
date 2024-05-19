@@ -1,78 +1,21 @@
-#template
-INSERT INTO vacancies(`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`)
-VALUES (
-  'title', 
-  'compaty',
-  'employment',
-  experience_from,
-  experience_to, 
-  'city', 
-  salary_from,
-  salary_to, 
-  'description'
-);
+-- Данные для таблицы `users`
+INSERT INTO `users` (`login`, `password`, `role`) VALUES
+('ivanov', 'ivanov123', 1),
+('petrov', 'petrov456', 1),
+('sidorov', 'sidorov789', 2),
+('smirnova', 'smirnova321', 2);
 
-INSERT INTO vacancies(`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`)
-VALUES (
-  'Frontend-разработчик', 
-  'Сбер', 
-  'Полная занятость',
-  1,
-  3, 
-  'Москва', 
-  null,
-  null, 
-  'Ищем Frontend-разработчика в трайб Заботы о Клиентах. Мы автоматизируем процессы обслуживания во всех каналах взаимодействия клиента с Банком: в мобильном приложении и на сайте, на звонке и в чате, при общении с голосовым помощником и текстовым ботом, на фронте и в бэк-офисе. Работаем на микросервисной архитектуре и отвечаем, как за фронтовую составляющую, так и за интеграционный слой.'
-);
+-- Данные для таблицы `vacancies`
+INSERT INTO `vacancies` (`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`, `employer_id`) VALUES
+('Разработчик Java', 'IT Company A', 'полная занятость', 2, 5, 'Москва', 100000, 150000, 'Требуется опытный Java-разработчик для работы над проектами компании.', 1),
+('Менеджер по продажам', 'Retail Company B', 'полная занятость', NULL, NULL, 'Санкт-Петербург', 80000, 120000, 'Компания ищет активного менеджера по продажам для расширения клиентской базы.', 2),
+('QA инженер', 'IT Company C', 'удаленная работа', 1, 3, 'Екатеринбург', 90000, 130000, 'Требуется опытный QA инженер для тестирования веб-приложений.', 1),
+('Финансовый аналитик', 'Finance Company D', 'полная занятость', 3, 6, 'Новосибирск', 120000, 180000, 'Компания ищет аналитика для финансового планирования и анализа.', 3);
 
-INSERT INTO vacancies(`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`)
-VALUES (
-  'Frontend-разработчик', 
-  'ООО АВП-Технология', 
-  'Полная занятость, полный день',
-  1,
-  3, 
-  null, 
-  60000,
-  100000, 
-  'В связи с расширением функционала сервера веб-мониторинга системы регистрации параметров на подвижном составе наша компания находится в поиске frontend-разработчика. На данный момент у нас есть сервер, реализованный на D, принимающий состояние локомотивов, API на Node.js для обработки этих данных и авторизации и управления пользователями, Frontend-часть приложения на Vue.'
-);
-
-INSERT INTO vacancies(`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`)
-VALUES (
-  'React разработчик', 
-  'ФГБУ НМИЦ эндокринологии Минздрава России',
-  'employment',
-  1,
-  3, 
-  'Москва', 
-  110000,
-  null, 
-  'В связи с расширением функционала сервера веб-мониторинга системы регистрации параметров на подвижном составе наша компания находится в поиске frontend-разработчика. На данный момент у нас есть сервер, реализованный на D, принимающий состояние локомотивов, API на Node.js для обработки этих данных и авторизации и управления пользователями, Frontend-часть приложения на React.'
-);
-
-INSERT INTO vacancies(`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`)
-VALUES (
-  'Middle Frontend Developer (React, Удаленно)', 
-  'Red Pill Studio',
-  'Частичная занятость, удаленная работа',
-  1,
-  3, 
-  null, 
-  null,
-  null, 
-  'Мы - инновационная компания, специализирующаяся на разработке в области передовых технологий: blockchain, AI и web. Работая у нас, вы столкнётесь с вызовами на стыке различных технологий и будете разрабатывать сложные продукты вместе с опытной командой.'
-);
-
-INSERT INTO vacancies(`title`, `company`, `employment`, `experience_from`, `experience_to`, `city`, `salary_from`, `salary_to`, `description`)
-VALUES (
-  'Frontend-разработчик (React.js)', 
-  'ООО Свик',
-  'Полная занятость, удаленная работа',
-  1,
-  3, 
-  null, 
-  60000,
-  80000, 
-  'Мы - инновационная компания, специализирующаяся на разработке в области передовых технологий: blockchain, AI и web. Работая у нас, вы столкнётесь с вызовами на стыке различных технологий и будете разрабатывать сложные продукты вместе с опытной командой.'
-);
+-- Данные для таблицы `replies`
+INSERT INTO `replies` (`user_id`, `vacancy_id`, `created_at`) VALUES
+(3, 1, '2024-05-19 10:00:00'),
+(4, 2, '2024-05-20 11:30:00'),
+(2, 3, '2024-05-21 09:45:00'),
+(1, 4, '2024-05-22 14:20:00'),
+(3, 3, '2024-05-23 16:10:00');
