@@ -31,4 +31,31 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
     }
     return $vacancies;
   }
+
+   function getVacancy(int $id): Vacancy | null {
+    $query = "SELECT * FROM vacancies WHERE id = ?";
+    $stmt = $this->bd->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+    
+    if(is_null($row)) {
+        return null;
+    }
+
+    return new Vacancy(
+      $row['id'],
+      $row['title'],
+      $row['employment'],
+      $row['description'],
+      $row['company'],
+      $row['experience_from'],
+      $row['experience_to'],
+      $row['city'],
+      $row['salary_from'],
+      $row['salary_to'],
+    );
+   }
 }

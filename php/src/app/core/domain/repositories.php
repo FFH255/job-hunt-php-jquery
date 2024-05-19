@@ -24,4 +24,5 @@ abstract class RepliesRepository {
 
 abstract class VacanciesRepository {
   abstract function getVacancies($employerId = null): array;
+  abstract function getVacancy(int $id): Vacancy | null;
 }
