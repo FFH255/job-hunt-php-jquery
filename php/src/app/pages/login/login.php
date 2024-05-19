@@ -38,9 +38,9 @@ function login(e) {
       login: login,
       password: password,
     },
-    success: () => {
+    success: (res) => {
       errorMessage.text('');
-      window.location.replace('/');
+      window.location.replace(res.redirectUrl);
     },
     error: () => {
       errorMessage.text('Пользователь не найден');

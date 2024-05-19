@@ -29,8 +29,7 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
   ];
 
   $employerHeaderLinks = [
-    ['link' => '/', 'title' => 'Главная'],
-    ['link' => '/replies.php', 'title' => 'Отклики'],
+    ['link' => '/employer-vacancies.php', 'title' => 'Главная'],
   ];
 
   $headerLinks = $viewerRepository->getRole()  === Role::Applicant ? $applicantHeaderLinks :  $employerHeaderLinks;

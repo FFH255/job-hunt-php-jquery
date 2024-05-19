@@ -10,14 +10,28 @@ $login = $_POST['login'];
 $password = $_POST['password'];
 
 try {
-  $ok = $authService->login($login, $password);
+  $role = $authService->login($login, $password);
 
-  if (!$ok) {
+  if (is_null($role)) {
     http_response_code(401);
     return;
   }
 
+  $redirectUrl = '/';
+  switch ($role) {
+    case Role::Applicant:
+      $redirectUrl = '/';
+      break;
+    case Role::Employer:
+      $redirectUrl = '/employer-vacancies.php';
+      break;
+    default:
+      break;
+  }
+
+  header('Content-Type: application/json');
   http_response_code(200);
+  echo json_encode(['redirectUrl' => $redirectUrl]);
 } catch(Exception $e) {
   http_response_code(500);
 }
