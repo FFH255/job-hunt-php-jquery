@@ -1,6 +1,7 @@
 <?php
 
-include_once dirname(__FILE__) . '/vacancies.core.php';
+include_once dirname(__FILE__) . '/../domain/models.php';
+include_once dirname(__FILE__) . '/../domain/repositories.php';
 
 class VacanciesRepositoryImpl extends VacanciesRepository {
   function __construct(
@@ -8,7 +9,7 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
   ) {}
 
   function getVacancies($employerId = null): array {
-    $query = "SELECT *, (SELECT COUNT(*) FROM replies WHERE replies.vacancy_id = vacancies.id) AS replies FROM vacancies";
+    $query = "SELECT * FROM vacancies";
     $stmt = $this->bd->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();

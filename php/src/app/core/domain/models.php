@@ -1,5 +1,25 @@
 <?php
-include_once dirname(__FILE__) . '/../auth/auth.core.php';
+  enum Role: int {
+    case None = 0;
+    case Applicant = 1;
+    case Employer = 2;
+  }
+
+  class User {
+    function __construct(
+      public int $id,
+      public string $name,
+      public string $password,
+      public Role $role,
+    ) {}
+  }
+class Reply {
+  function __construct(
+    public int $id,
+    public string $date,
+    public string $company,
+  ) {}
+}
 
 class Vacancy {
   public function __construct(
@@ -14,9 +34,4 @@ class Vacancy {
     public ?string $salaryFrom = null, 
     public ?string $salaryTo = null
   ) {}
-}
-
-
-abstract class VacanciesRepository {
-  abstract function getVacancies($employerId = null): array;
 }

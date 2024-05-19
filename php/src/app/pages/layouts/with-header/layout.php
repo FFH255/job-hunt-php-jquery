@@ -20,7 +20,9 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
 </head>
 
 <body>
-  <?php 
+  <?php
+  include_once dirname(__FILE__) . '/../../../main.php';
+  
   $applicantHeaderLinks = [
     ['link' => '/', 'title' => 'Главная'],
     ['link' => '/replies.php', 'title' => 'Отклики'],
@@ -31,7 +33,7 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
     ['link' => '/replies.php', 'title' => 'Отклики'],
   ];
 
-  $headerLinks = $authService->getAuth()->role  === Role::User->value ? $applicantHeaderLinks :  $employerHeaderLinks;
+  $headerLinks = $viewerRepository->getRole()  === Role::Applicant ? $applicantHeaderLinks :  $employerHeaderLinks;
 
   $currentURL = $_SERVER['REQUEST_URI'];
 ?>

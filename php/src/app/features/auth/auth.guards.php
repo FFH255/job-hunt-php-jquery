@@ -1,10 +1,11 @@
 <?php 
-include_once dirname(__FILE__) . '/auth.core.php';
+include_once dirname(__FILE__) . '/../../core/domain/repositories.php';
 class ApplicantGuard {
-  function __construct(private AuthService $authService) {}
+  function __construct(private ViewerRepository $viewerRepository) {}
   function canActivate() {
-    $auth = $this->authService->getAuth();
-    if ($auth->isAuth === true && $auth->role === Role::User->value) {
+    $role = $this->viewerRepository->getRole();
+    $isAuth = $this->viewerRepository->isAuth();
+    if ($isAuth === true && $role === Role::Applicant) {
       return;
     }
     header('Location: /login.php');

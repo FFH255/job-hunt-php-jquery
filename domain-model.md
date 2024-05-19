@@ -8,8 +8,8 @@ class Vacancy {
 }
 
 class Reply {
-  vacancy
-  applicant
+  vacancyId
+  applicantId
   date
 }
 

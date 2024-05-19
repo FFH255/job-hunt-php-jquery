@@ -1,5 +1,6 @@
 <?php
-include_once dirname(__FILE__) . '/auth.core.php';
+include_once dirname(__FILE__) . '/../domain/models.php';
+include_once dirname(__FILE__) . '/../domain/repositories.php';
 class UserRepositoryImpl extends UsersRepository {
   function __construct(
     private mysqli $bd,
@@ -20,7 +21,12 @@ class UserRepositoryImpl extends UsersRepository {
     
     $roleEnum = Role::from($row['role']);
     
-    return new User($row['login'], $row['password'], $roleEnum);
+    return new User(
+      $row['id'], 
+      $row['login'], 
+      $row['password'], 
+      $roleEnum
+    );
   }
 
   function addUser(string $login, string $password, int $role): User | null {
@@ -46,6 +52,11 @@ class UserRepositoryImpl extends UsersRepository {
 
     $roleEmun = Role::from($row['role']);
     
-    return new User($row['login'], $row['password'], $roleEmun);
+    return new User(
+      $row['id'], 
+      $row['login'], 
+      $row['password'], 
+      $roleEmun
+    );
   }
 }
