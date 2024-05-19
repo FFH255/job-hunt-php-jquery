@@ -65,7 +65,6 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
 
   <script>
   const logoutButton = $('#logout-button');
-  console.log('script')
 
   function logout() {
     $.ajax({

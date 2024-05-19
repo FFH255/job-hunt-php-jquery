@@ -102,4 +102,47 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
 
       return $vacancy;
    }
+
+   function editVacancy(VacancyFormValue $formValue, int $id): Vacancy {
+      $query = "UPDATE vacancies SET 
+              title = ?, 
+              company = ?, 
+              employment = ?, 
+              experience_from = ?, 
+              experience_to = ?, 
+              city = ?, 
+              salary_from = ?, 
+              salary_to = ?, 
+              description = ? 
+              WHERE id = ?";
+
+      $stmt = $this->bd->prepare($query);
+
+      $stmt->bind_param("sssssssssi", 
+                        $formValue->title, 
+                        $formValue->company, 
+                        $formValue->employment, 
+                        $formValue->experienceFrom, 
+                        $formValue->experienceTo, 
+                        $formValue->city, 
+                        $formValue->salaryFrom, 
+                        $formValue->salaryTo, 
+                        $formValue->description, 
+                        $id);
+
+      $stmt->execute();
+
+      return new Vacancy(
+          $id,
+          $formValue->title,
+          $formValue->employment,
+          $formValue->description,
+          $formValue->company,
+          $formValue->experienceFrom,
+          $formValue->experienceTo,
+          $formValue->city,
+          $formValue->salaryFrom,
+          $formValue->salaryTo
+      );
+   }
 }

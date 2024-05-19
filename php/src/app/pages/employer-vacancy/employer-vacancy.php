@@ -37,5 +37,11 @@ $('#delete-vacancy-button').on('click', function() {
       window.location = '/employer-vacancies.php';
     },
   })
+});
+
+const id = <?= $id ?>
+
+$('#edit-vacancy-button').on('click', function() {
+  window.location = `/edit-vacancy.php?id=${id}`;
 })
 </script>
