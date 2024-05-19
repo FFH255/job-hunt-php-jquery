@@ -24,14 +24,8 @@ class RepliesRepositoryImpl extends RepliesRepository {
     }
     return $vacancies;
   }
-  function createReply(int $applicantId, int $vacancyId): Reply {
-    $query = "INSERT INTO replies (user_id, vacancy_id, created_at) VALUES (?, ?, NOW())";
-    $stmt = $this->bd->prepare($query);
-    $stmt->bind_param("ii", $applicantId, $vacancyId);
-    $stmt->execute();
-    
-    $replyId = $stmt->insert_id;
 
+  function getReply(int $id): Reply | null {
     $query = "SELECT r.id, r.created_at, v.title, v.company FROM replies as r JOIN vacancies as v WHERE r.vacancy_id = v.id AND r.id = ? LIMIT 1;";
     $stmt = $this->bd->prepare($query);
     $stmt->bind_param("i", $replyId);
@@ -39,11 +33,27 @@ class RepliesRepositoryImpl extends RepliesRepository {
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
+    if (!$row['id'] || !$row['created_at'] || !$row['title'] || !$row['company']) {
+      return null;
+    }
+
     return new Reply(
       $row['id'],
-        $row['created_at'],
-        $row['title'],
-        $row['company']
+      $row['created_at'],
+      $row['title'],
+      $row['company']
     );  
+  }
+
+  function createReply(int $applicantId, int $vacancyId): Reply {
+    $query = "INSERT INTO replies (user_id, vacancy_id, created_at) VALUES (?, ?, NOW())";
+    $stmt = $this->bd->prepare($query);
+    $stmt->bind_param("ii", $applicantId, $vacancyId);
+    $stmt->execute();
+    
+    $id = $stmt->insert_id;
+    $reply = $this->getReply($id);
+
+    return $reply;
   }
 }

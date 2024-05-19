@@ -19,6 +19,8 @@ abstract class ViewerRepository {
 
 abstract class RepliesRepository {
   abstract function getApplicantReplies(int $applicantId): array;
+
+  abstract function getReply(int $id): Reply | null;
   abstract function createReply(int $applicantId, int $vacancyId): Reply;
 }
 
