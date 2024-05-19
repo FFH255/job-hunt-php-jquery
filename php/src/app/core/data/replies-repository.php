@@ -77,4 +77,12 @@ class RepliesRepositoryImpl extends RepliesRepository {
 
     return $reply[0];
   }
+
+  function deleteReply(int $id): void {
+    $query = "DELETE FROM replies WHERE id = ?;";
+    $stmt = $this->bd->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->get_result();
+  }
 }
