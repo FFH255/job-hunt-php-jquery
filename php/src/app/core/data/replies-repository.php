@@ -25,6 +25,25 @@ class RepliesRepositoryImpl extends RepliesRepository {
     return $vacancies;
   }
   function createReply(int $applicantId, int $vacancyId): Reply {
-    return new Reply(-1, 'fake_date', 'fake_title', 'fake_company');
+    $query = "INSERT INTO replies (user_id, vacancy_id, created_at) VALUES (?, ?, NOW())";
+    $stmt = $this->bd->prepare($query);
+    $stmt->bind_param("ii", $applicantId, $vacancyId);
+    $stmt->execute();
+    
+    $replyId = $stmt->insert_id;
+
+    $query = "SELECT r.id, r.created_at, v.title, v.company FROM replies as r JOIN vacancies as v WHERE r.vacancy_id = v.id AND r.id = ? LIMIT 1;";
+    $stmt = $this->bd->prepare($query);
+    $stmt->bind_param("i", $replyId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    return new Reply(
+      $row['id'],
+        $row['created_at'],
+        $row['title'],
+        $row['company']
+    );  
   }
 }

@@ -32,17 +32,29 @@ $vacancies = $vacanciesRepository->getVacancies();
       <?php endif; ?>
     </span>
     <div class='item__buttons'>
-      <button class='button button_theme_positive'>Откликнуться</button>
+      <button data-id="<?= $vacancy->id ?>" class='replay-button button button_theme_positive'>Откликнуться</button>
     </div>
   </div>
   <?php endforeach; ?>
 </div>
 
 <script>
-$(document).ready(function() {
-  $('.vacancy').on('click', function() {
-    var vacancyId = $(this).data('id');
-    window.location.href = '/vacancy.php?id=' + vacancyId;
-  });
+$('.vacancy').on('click', function() {
+  const vacancyId = $(this).data('id');
+  window.location.href = '/vacancy.php?id=' + vacancyId;
+});
+
+$('.replay-button').on('click', function(e) {
+  e.stopPropagation();
+
+  const vacancyId = $(this).data('id');
+
+  $.ajax({
+    url: `/api/reply-vacancy.php?id=${vacancyId}`,
+    method: 'get',
+    success: () => {
+
+    },
+  })
 });
 </script>

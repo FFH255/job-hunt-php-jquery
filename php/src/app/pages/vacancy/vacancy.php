@@ -19,9 +19,20 @@
   <span>от <?= $vacancy->salaryFrom ?> до <?= $vacancy->salaryTo ?></span>
   <span><?= $vacancy->description ?></span>
   <div class='item__buttons'>
-    <button class="button button_theme_positive">Откликнуться</button>
+    <button id="reply-button" class="button button_theme_positive">Откликнуться</button>
   </div>
 </div>
+
+<script>
+$('#reply-button').on('click', function() {
+  const id = <?= $id ?>;
+  $.ajax({
+    url: `/api/reply-vacancy.php?id=${id}`,
+    method: 'get',
+    success: () => {},
+  })
+});
+</script>
 
 <?php endif ?>
 <?php  endif ?>
