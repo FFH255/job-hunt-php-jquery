@@ -17,6 +17,7 @@ class Reply {
   function __construct(
     public int $id,
     public string $date,
+    public string $title,
     public string $company,
   ) {}
 }
