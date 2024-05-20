@@ -77,6 +77,9 @@ $('.form').submit(function(event) {
     success: function(response) {
       window.location.replace(`/employer-vacancy.php?id=${id}`);
     },
+    error: (e) => {
+      console.error(e);
+    }
   });
 });
 </script>

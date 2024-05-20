@@ -15,7 +15,7 @@ $formValue = new VacancyFormValue(
     $_POST['salary_to']
 );
 
-$vacanciesRepository->editVacancy($formValue, $id);
+$vacancy = $vacanciesRepository->editVacancy($formValue, $id);
 
 header('Content-Type: application/json');
 echo json_encode($vacancy);
