@@ -16,7 +16,7 @@ $pageName = str_replace('.php', '', $_SERVER['PHP_SELF']);
   <link rel="stylesheet" href="/app/pages/layouts/full-size/layout.css" />
   <link rel="stylesheet" href="<?php echo "/app/pages" . $pageName . $pageName . '.css';?>" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <title>Document</title>
+  <title>Job Hunt</title>
 </head>
 
 <body>

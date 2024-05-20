@@ -1,6 +1,11 @@
-<?php
+<?php 
 $vacancies = $getApplicantVacancies->execute();
+if(count($vacancies) === 0): 
 ?>
+
+<h2 class="placeholder">Нет доступных вакансий</h2>
+
+<?php else: ?>
 
 <div class='list'>
   <?php foreach ($vacancies as $vacancy): ?>
@@ -61,3 +66,5 @@ $('.replay-button').on('click', function(e) {
   })
 });
 </script>
+
+<?php endif;?>
