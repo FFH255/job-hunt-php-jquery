@@ -50,9 +50,9 @@ function register(e) {
       password: password,
       role: role,
     },
-    success: () => {
+    success: (res) => {
       errorMessage.text('');
-      window.location.replace('/');
+      window.location.replace(res.redirectUrl ?? '/');
     },
     error: () => {
       errorMessage.text('Пользователь уже существует');

@@ -8,6 +8,9 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
 
   function getVacancies($employerId = null): array {
     $query = "SELECT * FROM vacancies";
+    if($employerId !== null) {
+      $query .= " WHERE employer_id = $employerId";
+    }
     $stmt = $this->bd->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();

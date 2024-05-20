@@ -1,7 +1,17 @@
-<?php 
-$id = $_GET['id'];
-$vacancy = $vacanciesRepository->getVacancy($id);
-?>
+<?php $id = $_GET['id'];?>
+<?php if(!ctype_digit($id)): ?>
+
+<h2 class="placeholder">Вакансия не найдена</h2>
+
+<?php else: ?>
+
+<?php $vacancy = $vacanciesRepository->getVacancy($id); ?>
+
+<?php if($vacancy === null): ?>
+
+<h2 class="placeholder">Вакансия не найдена</h2>
+
+<?php else: ?>
 
 <h1 class="form-title">Редактирование вакансии</h1>
 <form class="form">
@@ -83,3 +93,8 @@ $('.form').submit(function(event) {
   });
 });
 </script>
+
+<?php endif; ?>
+
+
+<?php endif; ?>
