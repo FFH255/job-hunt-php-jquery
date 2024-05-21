@@ -6,32 +6,53 @@ class VacanciesRepositoryImpl extends VacanciesRepository {
     private mysqli $bd,
   ) {}
 
-  function getVacancies($employerId = null): array {
+  public function getVacancies(?int $employerId = null, ?string $employmentString = null): array {
     $query = "SELECT * FROM vacancies";
-    if($employerId !== null) {
-      $query .= " WHERE employer_id = $employerId";
+    $params = [];
+    $types = '';
+
+    if ($employerId !== null) {
+        $query .= " WHERE employer_id = ?";
+        $params[] = $employerId;
+        $types .= 'i';
     }
+
+    if ($employmentString !== null) {
+        $query .= $employerId === null ? " WHERE" : " AND";
+        $query .= " employment LIKE ?";
+        $params[] = "%{$employmentString}%";
+        $types .= 's';
+    }
+
     $stmt = $this->bd->prepare($query);
+
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+
     $stmt->execute();
     $result = $stmt->get_result();
     $vacancies = [];
+
     while ($row = $result->fetch_assoc()) {
-      $vacancy = new Vacancy(
-        $row['id'],
-        $row['title'],
-        $row['employment'],
-        $row['description'],
-        $row['company'],
-        $row['experience_from'],
-        $row['experience_to'],
-        $row['city'],
-        $row['salary_from'],
-        $row['salary_to'],
-      );
-      $vacancies[] = $vacancy;
+        $vacancy = new Vacancy(
+            $row['id'],
+            $row['title'],
+            $row['employment'],
+            $row['description'],
+            $row['company'],
+            $row['experience_from'],
+            $row['experience_to'],
+            $row['city'],
+            $row['salary_from'],
+            $row['salary_to']
+        );
+        $vacancies[] = $vacancy;
     }
+
     return $vacancies;
-  }
+}
+
 
    function getVacancy(int $id): Vacancy | null {
     $query = "SELECT * FROM vacancies WHERE id = ?";

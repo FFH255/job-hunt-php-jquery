@@ -1,0 +1,11 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 2rem;
+}
+
+.filter {
+  place-self: center;
+  display: flex;
+  gap: .8rem;
+}
